@@ -1,1 +1,6 @@
-<p>board works!</p>
+<div *ngFor="let round of rounds" class="col">
+    <button *ngFor="let col of cols" class="row_{{round}} col_{{col}} circle" [style.background-color]="'red'" (click)="changeColor(col, round, 'red')"></button>
+</div>
+<div>
+  <button>Submit</button>
+</div>
