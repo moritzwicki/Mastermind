@@ -15,9 +15,9 @@ export class ColorFieldComponent implements OnInit {
   public row!: number;
 
 
-  public color: Color = Color.RED;
+  public color: Color = Color.WHITE;
 
-  constructor() {
+  constructor(private mastermindService: MastermindService) {
   }
 
   ngOnInit(): void {
@@ -30,9 +30,16 @@ export class ColorFieldComponent implements OnInit {
 
   changeColor() {
     if (this.color === MastermindService.colors.length - 1) {
-      this.color = Color.RED
+      this.color = Color.GREEN
     } else {
       this.color++;
     }
+    this.mastermindService.addTempColor(this.col, this.color);
+  }
+
+  isDisabled(): boolean {
+    return this.row !== this.mastermindService.round
   }
 }
+
+

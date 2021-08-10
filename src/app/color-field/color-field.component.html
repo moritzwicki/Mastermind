@@ -2,5 +2,6 @@
   (click)="changeColor()"
   class="circle"
   [style.background-color]="toHtmlColor(color)"
+  [disabled]="isDisabled()"
 >
 </button>

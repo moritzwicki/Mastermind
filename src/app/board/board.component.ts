@@ -18,4 +18,8 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  submitGuess() {
+    console.log(this.masterMindService.check());
+  }
 }
