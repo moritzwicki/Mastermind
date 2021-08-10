@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MastermindService} from "../mastermind.service";
-import {Colors} from "../colors.type";
+import {Color} from '../colors.type';
 
 @Component({
   selector: 'app-board',
@@ -9,16 +9,13 @@ import {Colors} from "../colors.type";
 })
 export class BoardComponent implements OnInit {
 
-  constructor(public masterMindService: MastermindService) { }
+  rounds = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+  cols = [1, 2, 3, 4];
 
-  rounds = [12,11,10,9,8,7,6,5,4,3,2,1];
-  cols = [1,2,3,4];
+
+  constructor(public masterMindService: MastermindService) {
+  }
 
   ngOnInit(): void {
   }
-
-  changeColor(col: number, row: number, colourNow: string) {
-
-  }
-
 }

@@ -1,19 +1,23 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Colors} from './colors.type';
+import {Color} from './colors.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MastermindService implements OnInit {
+
+  public static colors = [Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.PINK, Color.GREY, Color.WHITE];
+
+
   private round: number = 1;
-  private correctCombination: Colors[] = [];
+  private correctCombination: Color[] = [];
 
   ngOnInit(): void {
     this.correctCombination = this.generateCode()
   }
 
   // [ Color, Position ]
-  public check(colors: Colors[]): [number, number] | undefined {
+  public check(colors: Color[]): [number, number] | undefined {
     if (this.round > 12) {
       console.warn('Maximum rounds exceeded')
       return;
@@ -36,8 +40,8 @@ export class MastermindService implements OnInit {
   }
 
 
-  private generateCode(): Colors[] {
-    let colors: Colors[] = [];
+  private generateCode(): Color[] {
+    let colors: Color[] = [];
     for (let i = 0; i < 4; i++) {
       colors[i] = Math.floor(Math.random() * 8);
     }

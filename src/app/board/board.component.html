@@ -1,5 +1,11 @@
 <div *ngFor="let round of rounds" class="col">
-    <button *ngFor="let col of cols" class="row_{{round}} col_{{col}} circle" [style.background-color]="'red'" (click)="changeColor(col, round, 'red')"></button>
+  <app-color-field
+    *ngFor="let col of cols"
+    [row]="round"
+    [col]="col"
+  >
+
+  </app-color-field>
 </div>
 <div>
   <button>Submit</button>
