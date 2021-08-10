@@ -20,32 +20,29 @@ export class MastermindService {
       console.warn('Maximum rounds exceeded')
       return;
     }
+    console.log('TempColors', this.tempColors);
 
     let positionCounter = 0;
     let colorCounter = 0;
     for (let [index, color] of this.tempColors.entries()) {
       if (color === this.correctCombination[index]) {
         positionCounter++;
-        this.tempColors.splice(index);
-      } else if (this.correctCombination.includes(color)) {
-        colorCounter++;
-        this.tempColors.splice(index)
+        this.tempColors[index] = -1;
       }
     }
-    console.log(this.tempColors);
-    console.log(this.correctCombination);
+
+    for (let [index, color] of this.tempColors.entries()) {
+      if (this.correctCombination.includes(color)) {
+        colorCounter++;
+        this.tempColors[index] = -1;
+      }
+    }
+
+    console.log('CorrectCombination', this.correctCombination);
+
+    this.tempColors = [Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE]
     this.round++;
     return [colorCounter, positionCounter];
-  }
-
-
-  private generateCode(): Color[] {
-    let colors: Color[] = [];
-    for (let i = 0; i < 4; i++) {
-      colors[i] = Math.floor(Math.random() * 8);
-    }
-    return colors;
-
   }
 
   public reset(): void {
@@ -54,8 +51,16 @@ export class MastermindService {
   }
 
   public addTempColor(col: number, color: Color) {
-    console.log(color);
     this.tempColors[col - 1] = color;
+  }
+
+  private generateCode(): Color[] {
+    let colors: Color[] = [];
+    for (let i = 0; i < 4; i++) {
+      colors[i] = Math.floor(Math.random() * 8);
+    }
+    return colors;
+
   }
 
 }
