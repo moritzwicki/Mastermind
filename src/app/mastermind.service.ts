@@ -12,10 +12,11 @@ export class MastermindService {
   public round: number = 1;
   private correctCombination: Color[] = this.generateCode();
 
-  private tempColors: Color[] = [Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE];
+  private tempColors: (Color | null)[] = [Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE];
 
   // [ Color, Position ]
   public check(): [number, number] | undefined {
+    let correctCombinationCopy: (Color | null)[] = [...this.correctCombination]
     if (this.round > 12) {
       console.warn('Maximum rounds exceeded')
       return;
@@ -25,19 +26,23 @@ export class MastermindService {
     let positionCounter = 0;
     let colorCounter = 0;
     for (let [index, color] of this.tempColors.entries()) {
-      if (color === this.correctCombination[index]) {
+      if (color != null && color === correctCombinationCopy[index]) {
         positionCounter++;
-        this.tempColors[index] = -1;
+        correctCombinationCopy[index] = null;
+        this.tempColors[index] = null;
       }
     }
 
     for (let [index, color] of this.tempColors.entries()) {
-      if (this.correctCombination.includes(color)) {
+      if (color != null && correctCombinationCopy.includes(color)) {
         colorCounter++;
-        this.tempColors[index] = -1;
+        correctCombinationCopy[index] = null;
+        this.tempColors[index] = null;
       }
     }
 
+
+    console.log('CorrectCombinationCopy', correctCombinationCopy);
     console.log('CorrectCombination', this.correctCombination);
 
     this.tempColors = [Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE]

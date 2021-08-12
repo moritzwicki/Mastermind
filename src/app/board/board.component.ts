@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MastermindService} from "../mastermind.service";
-import {Color} from '../colors.type';
 
 @Component({
   selector: 'app-board',
