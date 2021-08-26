@@ -20,6 +20,7 @@ export class BoardComponent implements OnInit {
 
   submitGuess() {
     let correction = this.masterMindService.check();
+    console.log(correction)
     if (!correction) {
       alert('You lost!');
     }

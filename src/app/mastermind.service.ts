@@ -7,11 +7,8 @@ import {Color} from './colors.type';
 export class MastermindService {
 
   public static colors = [Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.PINK, Color.GREY, Color.WHITE];
-
-
   public round: number = 1;
-  private correctCombination: Color[] = this.generateCode();
-
+  correctCombination: Color[] = this.generateCode();
   private tempColors: (Color | null)[] = [Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE];
 
   // [ Color, Position ]
@@ -36,7 +33,8 @@ export class MastermindService {
     for (let [index, color] of this.tempColors.entries()) {
       if (color != null && correctCombinationCopy.includes(color)) {
         colorCounter++;
-        correctCombinationCopy[index] = null;
+        // Don't Remove the index
+        correctCombinationCopy[correctCombinationCopy.indexOf(color)] = null;
         this.tempColors[index] = null;
       }
     }
@@ -59,7 +57,7 @@ export class MastermindService {
     this.tempColors[col - 1] = color;
   }
 
-  private generateCode(): Color[] {
+  generateCode(): Color[] {
     let colors: Color[] = [];
     for (let i = 0; i < 4; i++) {
       colors[i] = Math.floor(Math.random() * 8);
